@@ -192,8 +192,8 @@ async function semRush(url) {
         const projects = await request(`/management/v1/projects`);
         const project = projects.filter(project => url.includes(project.url))[0];
         const keywordsData = await request('', `type=domain_organic&domain=${project.url}&database=us`, false);
-        const path = `../semrush-keywords/${URL.parse(url).hostname}.csv`;
-        await fs.promises.writeFile(path, keywordsData);
+        const path = `semrush-keywords/${URL.parse(url).hostname}.csv`;
+        await fs.promises.writeFile(`../${path}`, keywordsData);
         const keywords = `http://${config.serverIp}:${config.port}/${path}?customtoken=valerii15298`;
         resp = await request(`/reports/v1/projects/${project.project_id}/siteaudit/info`);
         resp = [
