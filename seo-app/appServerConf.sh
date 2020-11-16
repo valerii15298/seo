@@ -24,7 +24,7 @@ sudo apt install -y nodejs gconf-service libasound2 libatk1.0-0 libc6 libcairo2 
 cd $rootdir && git clone https://github.com/valerii15298/seo.git app && cd app/seo-app && npm init -y && npm i node-fetch express puppeteer googleapis && npm install -g pm2
 
 # Configure Screaming frog
-chmod +x $rootdir/app/install-sf.sh && source $rootdir/app/install-sf.sh
+chmod +x $rootdir/app/screaming-frog/install-sf.sh && source $rootdir/app/screaming-frog/install-sf.sh
 echo "unset DISPLAY" >>~/.bashrc
 
 #configure docker private instance webpagetest server and agent
