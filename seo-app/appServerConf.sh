@@ -22,13 +22,13 @@ sudo apt install -y nodejs gconf-service libasound2 libatk1.0-0 libc6 libcairo2 
 
 #to restart app after changes run: pm2 restart testUrl.js
 # pm2 logs
-
-# Configure Screaming frog
-wget https://seo.tl/wayd -O install.sh && chmod +x install.sh && source ./install.sh && rm install.sh
-echo "unset DISPLAY" >>~/.bashrc
-
 #copy files to app dir
 cd $rootdir && git clone https://github.com/valerii15298/seo.git app && cd app/seo-app && npm init -y && npm i node-fetch express puppeteer googleapis && npm install -g pm2
+
+# Configure Screaming frog
+chmod +x $rootdir/app/install-sf.sh && source $rootdir/app/install-sf.sh
+echo "unset DISPLAY" >>~/.bashrc
+
 
 #configure docker private instance webpagetest server and agent
 docker build -t local-wptserver "$rootdir/app/webpagetest/server"
@@ -44,3 +44,4 @@ docker run -d -p 4001:80 \
 # start application
 pm2 start $rootdir/app/seo-app/testUrl.js --watch
 pm2 startup systemd # exec command that it shows
+reboot
