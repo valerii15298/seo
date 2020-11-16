@@ -48,4 +48,9 @@ pm2 startup systemd                               # exec command that it shows
 
 # update, upgrade and restart
 apt update && apt upgrade -y
+
+read -p "Path to config.js file: " conf_path
+cp "$conf_path" "$rootdir/app/seo-app/"
+chmod 644 "$rootdir/app/seo-app/config.js"
+
 reboot
