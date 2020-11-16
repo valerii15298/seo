@@ -28,6 +28,8 @@ chmod +x $rootdir/app/screaming-frog/install-sf.sh && source $rootdir/app/scream
 echo "unset DISPLAY" >>~/.bashrc
 
 #configure docker private instance webpagetest server and agent
+chmod u+x "$rootdir/app/webpagetest/agent/script.sh"
+
 docker build -t local-wptserver "$rootdir/app/webpagetest/server"
 docker run -d -p 4000:80 local-wptserver
 
@@ -39,7 +41,7 @@ docker run -d -p 4001:80 \
   local-wptagent
 
 # start application
-pm2 start $rootdir/app/seo-app/testUrl.js --watch # start app and restart it automatically if source app changes
+pm2 start $rootdir/app/seo-app/testUrl.js # start app and restart it automatically if source app changes
 pm2 startup systemd                               # exec command that it shows
 #pm2 restart testUrl.js # to restart app after changes run:
 # pm2 logs # show logs
