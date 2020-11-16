@@ -42,15 +42,19 @@ docker run -d -p 4001:80 \
 
 # start application
 pm2 start $rootdir/app/seo-app/testUrl.js # start app and restart it automatically if source app changes
-pm2 startup systemd                               # exec command that it shows
+pm2 startup systemd                       # exec command that it shows
 #pm2 restart testUrl.js # to restart app after changes run:
 # pm2 logs # show logs
 
 # update, upgrade and restart
 apt update && apt upgrade -y
 
-read -p "Path to config.js file: " conf_path
-cp "$conf_path" "$rootdir/app/seo-app/"
+mv "$rootdir/config.js" "$rootdir/app/seo-app/"
 chmod 644 "$rootdir/app/seo-app/config.js"
+
+mv "$rootdir/tokens.json" "$rootdir/app/seo-app/"
+chmod 644 "$rootdir/app/seo-app/tokens.json"
+
+read -rp 'Press "Enter" to reboot: '
 
 reboot
