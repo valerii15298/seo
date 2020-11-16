@@ -1,3 +1,11 @@
+const config = require("./config");
+const fetch = require('node-fetch');
+const puppeteer = require('puppeteer');
+const {google} = require('googleapis');
+const fs = require('fs');
+const express = require('express');
+const URL = require('url');
+
 /**
  * Executes a shell command and return it as a Promise.
  * @param cmd {string}
@@ -15,13 +23,7 @@ function execShellCommand(cmd) {
     });
 }
 
-const config = require("./config");
-const fetch = require('node-fetch');
-const puppeteer = require('puppeteer');
-const {google} = require('googleapis');
-const fs = require('fs');
-const express = require('express');
-const URL = require('url');
+
 
 const app = express();
 
