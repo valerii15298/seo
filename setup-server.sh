@@ -31,10 +31,10 @@ echo "unset DISPLAY" >>~/.bashrc
 chmod u+x "$rootdir/app/webpagetest/agent/script.sh"
 
 docker build -t local-wptserver "$rootdir/app/webpagetest/server"
-docker run -d -p 4000:80 local-wptserver
+docker run -td -p 4000:80 local-wptserver
 
 docker build -t local-wptagent "$rootdir/app/webpagetest/agent"
-docker run -d -p 4001:80 \
+docker run -td -p 4001:80 \
   --network="host" \
   -e "SERVER_URL=http://localhost:4000/work/" \
   -e "LOCATION=Test" \
