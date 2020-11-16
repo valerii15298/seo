@@ -7,7 +7,7 @@ yarn-error.log*
 lerna-debug.log*
 node_modules
 config.js
-**tokens.json
+tokens.json
 
 # Diagnostic reports (https://nodejs.org/api/report.html)
 report.[0-9]*.[0-9]*.[0-9]*.[0-9]*.json
