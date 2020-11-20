@@ -56,71 +56,21 @@ cd ~/
 if [[ ! -d ~/.ScreamingFrogSEOSpider ]]; then
     mkdir -p ~/.ScreamingFrogSEOSpider
 fi
-if [[ -f ~/.ScreamingFrogSEOSpider/licence.txt ]]; then
-    echo -e "${BLUE}License found.${NC}"
-    read -p "Replace? [y/n]: " LCONT
-    if [[ $LCONT = 'y' ]] || [[ $LCONT = 'yes' ]] || [[ $LCONT = 'Y' ]] || [[ $LCONT = 'Yes' ]]; then
-        sudo rm ~/.ScreamingFrogSEOSpider/licence.txt
-        sleep 1
-    fi
-    echo
-fi
-if [[ ! -f ~/.ScreamingFrogSEOSpider/licence.txt ]]; then
-    echo "To continue, you need to provide your Screaming Frog"
-    echo "SEO Spider license details."
-#    read -p "Your license username: " USERNAME
-#    read -p "Your license key: " LICENSEKEY
 
-    USERNAME='modernfirm'
-    LICENSEKEY='3F4C475EBE-1631404800-5DB896FA0C'
+# Set License in ~/.ScreamingFrogSEOSpider folder
+# It must be file license.txt in first line username, in second - licensekey
 
-    if [[ $USERNAME = "" ]] || [[ $USERNAME = " " ]] || [[ $LICENSEKEY = "" ]] || [[ $LICENSEKEY = " " ]]; then
-        echo
-        echo -e "${RED}Missing Screaming Frog SEO Spider license data."
-        echo -e "Installation aborted.${NC}"
-        echo
-        exit -1
-    fi
-    touch ~/.ScreamingFrogSEOSpider/licence.txt
-    echo "$USERNAME" > ~/.ScreamingFrogSEOSpider/licence.txt
-    echo "$LICENSEKEY" >> ~/.ScreamingFrogSEOSpider/licence.txt
-    echo
-fi
-if [[ -f ~/.screamingfrogseospider ]]; then
-    echo -e "${BLUE}Memory allocation file found.${NC}"
-    read -p "Replace? [y/n]: " MCONT
-    if [[ $MCONT = 'y' ]] || [[ $MCONT = 'yes' ]] || [[ $MCONT = 'Y' ]] || [[ $MCONT = 'Yes' ]]; then
-        sudo rm ~/.screamingfrogseospider
-        sleep 1
-    fi
-    echo
-fi
 if [[ ! -f ~/.screamingfrogseospider ]]; then
-    echo "Type a number to set memory allocation in GB, e.g. 25"
-    read -p "(or leave blank defaults to 50GB): " VIRTUALMEMORY
-    if [[ $VIRTUALMEMORY = "" ]] || [[ $VIRTUALMEMORY = " " ]] || [[ -n ${VIRTUALMEMORY//[0-9]/} ]]; then
-        VIRTUALMEMORY="50"
-    fi
+#    echo "Type a number to set memory allocation in GB, e.g. 25"
+#    read -p "(or leave blank defaults to 50GB): " VIRTUALMEMORY
+    VIRTUALMEMORY='5'
     touch ~/.screamingfrogseospider
     echo "-Xmx${VIRTUALMEMORY}g" > ~/.screamingfrogseospider
     echo
 fi
-if [[ -f ~/.ScreamingFrogSEOSpider/spider.config ]]; then
-    echo -e "${BLUE}Configuration file found.${NC}"
-    read -p "Replace? [y/n]: " CCONT
-    if [[ $CCONT = 'y' ]] || [[ $CCONT = 'yes' ]] || [[ $CCONT = 'Y' ]] || [[ $CCONT = 'Yes' ]]; then
-        sudo rm ~/.ScreamingFrogSEOSpider/spider.config
-        sleep 1
-    fi
-    echo
-fi
+
 if [[ ! -f ~/.ScreamingFrogSEOSpider/spider.config ]]; then
-    read -p "Enable database storage mode? [y/n]: " STORAGEMODE
-    if [[ $STORAGEMODE = "y" ]] || [[ $STORAGEMODE = "yes" ]] || [[ $STORAGEMODE = "Y" ]] || [[ $STORAGEMODE = "Yes" ]]; then
-        STORAGEMODE="DB"
-    else
-        STORAGEMODE=""
-    fi
+    STORAGEMODE=""
     touch ~/.ScreamingFrogSEOSpider/spider.config
     echo "eula.accepted=9" > ~/.ScreamingFrogSEOSpider/spider.config
     echo "storage.mode=${STORAGEMODE}" >> ~/.ScreamingFrogSEOSpider/spider.config
