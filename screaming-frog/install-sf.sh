@@ -40,17 +40,6 @@ FREE=$(df -k --output=avail "$PWD" | tail -n1)
 #    exit -1
 #fi
 
-if [ "$reset" -gt 0 ]; then
-    echo -e "${ORANGE}Disabling SWAP.${NC}"
-    sudo swapoff -a
-    echo -e "${ORANGE}Removing previous Screaming Frog SEO Spider installation and data.${NC}"
-    sudo rm -rf ~/.ScreamingFrogSEOSpider
-    sudo rm -rf ~/.screamingfrogseospider
-    ! sudo apt-get remove screamingfrogseospider -y
-    rm screamingfrogseospider_*
-    echo
-    free -h
-fi
 echo
 echo -e "${GREEN}[Step 1/6] Configure Screaming Frog SEO Spider settings.${NC}"
 echo
@@ -78,29 +67,7 @@ if [[ ! -f ~/.ScreamingFrogSEOSpider/spider.config ]]; then
     echo "storage.mode=${STORAGEMODE}" >> ~/.ScreamingFrogSEOSpider/spider.config
     echo
 fi
-if [ "$beta" -gt 0 ]; then
-    echo -e "${ORANGE}Enter the URL of the beta version of Screaming Frog SEO Spider.${NC}"
-    read -p "URL (without spaces): " BETA_URL
-    if [[ $BETA_URL = "" ]] || [[ $BETA_URL = " " ]]; then
-        echo
-        echo -e "${RED}No valid beta URL entered."
-        echo -e "Installation aborted.${NC}"
-        echo
-        exit -1
-    else
-        URL_REGEX='^https://[^\/]*screamingfrog\.co\.uk\/.*\.deb$'
-        if [[ $BETA_URL =~ $URL_REGEX ]]; then
-            echo
-        else
-            echo
-            echo -e "${RED}No valid beta URL entered."
-            echo -e "Installation aborted.${NC}"
-            echo
-            exit -1
-        fi
-    fi
-    echo
-fi
+
 echo -e "${GREEN}[Step 1/5] Installing dependencies.${NC}"
 sudo apt-get update && sudo apt-get install dialog apt-utils -y
 echo 'debconf debconf/frontend select Noninteractive' | sudo debconf-set-selections
@@ -167,7 +134,7 @@ if [ "$beta" -gt 0 ]; then
     wget "$BETA_URL"
 else
     echo -e "${GREEN}[Step 3/6] Downloading the latest stable Screaming Frog SEO Spider installer.${NC}"
-    wget "$(curl -sSL 'https://seo.tl/qlxr' | grep -oP '[^"]+\.deb')"
+    #wget "$(curl -sSL 'https://seo.tl/qlxr' | grep -oP '[^"]+\.deb')"
 fi
 echo
 echo -e "${GREEN}[Step 4/6] Installing Screaming Frog SEO Spider.${NC}"
