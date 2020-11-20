@@ -178,8 +178,8 @@ echo
 echo -e "${GREEN}[Step 6/6] Configuring SWAP.${NC}"
 PHYMEM=$(free -g|awk '/^Mem:/{print $2}')
 SWAP=$(sudo swapon -s)
-if [[ "$PHYMEM" -lt "50"  &&  -z "$SWAP" ]]; then
-    sudo fallocate -l 50G /swapfile
+if [[ "$PHYMEM" -lt "10"  &&  -z "$SWAP" ]]; then
+    sudo fallocate -l 5G /swapfile
     sudo chmod 600 /swapfile
     ls -lh /swapfile
     sudo mkswap /swapfile
