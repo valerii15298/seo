@@ -32,12 +32,14 @@ if [[ $PLATFORM != "Ubuntu" ]] && [[ $PLATFORM != "ubuntu" ]]; then
     exit -1
 fi
 FREE=$(df -k --output=avail "$PWD" | tail -n1)
-if [[ $FREE -lt 62914560 ]]; then               # 10G = 10*1024*1024k
-    echo -e "${RED}Not enough disk space available."
-    echo -e "Installation aborted. Check the installation guide!${NC}"
-    echo
-    exit -1
-fi
+
+#if [[ $FREE -lt 62914560 ]]; then               # 10G = 10*1024*1024k
+#    echo -e "${RED}Not enough disk space available."
+#    echo -e "Installation aborted. Check the installation guide!${NC}"
+#    echo
+#    exit -1
+#fi
+
 if [ "$reset" -gt 0 ]; then
     echo -e "${ORANGE}Disabling SWAP.${NC}"
     sudo swapoff -a
